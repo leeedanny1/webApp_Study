@@ -1,0 +1,55 @@
+스프링툴 압축풀기
+
+help - 마켓플레이스
+검색: eclipse web
+~~java and web Developer 설치
+
+마켓플레이스
+검색: spring
+spring 3 버전 설치
+
+
+
+톰캣 설치 - 톰캣9
+톰캣홈피
+32-bit/64-bit Windows Service Installer (pgp, sha512)
+이름: *-junil
+셧다운포트: 8005
+일반포트:8000
+유저네임: admin
+비번: toor
+
+설치경로: 워크스페이스 폴더
+
+
+
+서버연결
+프로젝트 우클릭 - run on server - 아파치 - 경로찾아서 - finish
+
+pc에서 실행중인 tomcat서버는 종료해줌
+
+
+
+windows - preference - console검색, 버퍼사이즈 0하나 더 추가
+
+
+
+
+빨간 줄 해결:
+프로젝트 우클릭 - propertys - javaBuildPath - Libraries - 
+classpath클릭 후 - add external JARs... -
+톰캣폴더 안 lib - jap_api, servlet_api 임폴트
+
+
+
+인코딩
+윈도우 - 설정 - encoding검색
+content types 이랑 workspace 에 UTF-8 적용..
+전부다...
+
+
+
+
+
+
+

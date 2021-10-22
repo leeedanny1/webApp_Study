@@ -1,0 +1,38 @@
+/* 구글웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+*{
+    margin: 0; padding: 0;
+    font-size: 16px;
+    font-family: 'Jua', sans-serif;
+    color: #292929
+}
+
+/* 화면 전체 사이즈 설정 */
+#wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* 스타일 설정 */
+a{
+    text-decoration: none;
+}
+
+ul, ol, li{
+    list-style: none;
+}
+
+
+/* footer */
+footer{
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+.service_info a{
+    padding: 0 10px;
+}

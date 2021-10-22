@@ -1,0 +1,54 @@
+/* 전화번호 입력박스 부모포지션 */
+.signup_container .signup_form .tel_container{
+    position: relative;
+    margin-bottom: 8px;
+    width: 100%;
+    height: 40px;
+    border-bottom: 2px solid black;
+}
+
+
+
+/* 국가번호 선택 */
+.signup_container .signup_form .select_nation{
+    position: absolute;
+    left: 0%;
+
+    width: 30%;
+    height: 40px;
+    text-align: center;
+
+    border: none;
+}
+.signup_container .signup_form .select_nation:focus{
+    outline: none;
+}
+
+
+
+/* 전화번호 입력 input */
+.signup_container .signup_form .tel{
+    border: none;
+    margin-top: 0;
+    margin-left: 33%;
+    width: 45%;
+}
+
+
+
+/* 인증요청박스 */
+.signup_container .signup_form .tel_confirm{
+    margin-top: 0;
+    position: absolute;
+    top: 10%; right: 3px;
+
+    width: 20%;
+    height: 30px;
+    line-height: 30px;
+
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+.signup_container .signup_form .tel_confirm:hover{
+    background-color: #ccc;
+}

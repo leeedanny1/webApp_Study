@@ -1,0 +1,61 @@
+/* 전체 컨테이너 */
+.container {
+    margin: 0px auto;
+    padding-top: 30px;
+    width: 1296px;
+    box-sizing: border-box;
+}
+
+
+
+/* 헤더부분 */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px auto;
+}
+
+/* 헤더왼쪽 로고 */
+.brand_logo > a {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* 내비게이션 */
+.nav_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    list-style: none;
+}
+.nav_item a {
+    padding: 0px 30px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.nav_item a:hover {
+    color: darkgray;
+}
+
+/* 우측 회원관리 */
+.nav_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    list-style: none;
+}
+.nav_user a{
+    padding: 0px 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: black;
+}
+.nav_user a:hover {
+    color: darkgray;
+}
