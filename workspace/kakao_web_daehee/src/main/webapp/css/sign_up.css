@@ -81,12 +81,15 @@ progress {
 .item_msg .msg1 {
 	display: none;
 }
+
 .item_msg .msg2 {
 	display: none;
 }
+
 .item_msg .msg3 {
 	display: none;
 }
+
 .item_msg .msg4 {
 	color: green;
 	display: none;

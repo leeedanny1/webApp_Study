@@ -1,4 +1,3 @@
-// 아이디가 존재할 경우
 const flag = document.querySelector('#flag');
 
 if(flag.value == 1){
@@ -6,8 +5,6 @@ if(flag.value == 1){
 	msg2.style.display = 'block';
 }
 
-
-// input 박스가 비었는지 여부 검사
 const item_ip = document.querySelector('.item_ip');
 const btn_g = document.querySelector('.btn_g');
 
@@ -17,7 +14,6 @@ item_ip.onkeypress = () => {
 		onSubmit();
 	}
 }
-
 
 btn_g.onclick = () => {
 	onSubmit();

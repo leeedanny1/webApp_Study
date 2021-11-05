@@ -1,0 +1,61 @@
+/* 전체 컨테이너 */
+.container {
+    margin: 0px auto;
+    padding-top: 30px;
+    width: 1296px;
+    box-sizing: border-box;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 50px;
+}
+
+main ul{
+    display: flex;
+    padding: 0;
+    margin: 0;
+
+    height: 30px;
+    border: 1px solid rgb(214, 214, 214);
+    text-align: center;
+    line-height: 30px;
+    list-style: none;
+}
+
+main a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.notice_header ul{
+    border-bottom: 5px solid steelblue;
+}
+
+.notice_main ul{
+    border-top: 0;
+}
+.notice_main ul:hover{
+    background-color: lightgray;
+}
+
+.notice_num{
+    width: 50px;
+}
+.notice_title{
+    width: 400px;
+}
+.notice_writer{
+    width: 120px;
+}
+.notice_date{
+    width: 130px;
+}
+.notice_count{
+    width: 100px;
+}
