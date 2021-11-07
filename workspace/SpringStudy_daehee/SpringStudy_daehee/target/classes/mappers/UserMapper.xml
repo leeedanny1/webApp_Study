@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.spring.study.model.dao.UserDao">
+	<select id="getUser" resultType="com.spring.study.model.dto.UserDto">
+		select
+			user_email, user_password, user_name, user_phone
+		from
+			user_mst
+		where
+			user_email = #{email}
+	</select>
+	
+	<select id="login" parameterType="com.spring.study.model.dto.UserDto" resultType="Integer">
+		select
+			count(um.user_email) + count(ud.user_email) as result
+		from
+			user_mst um
+			left outer join user_mst ud on(ud.user_email = um.user_email and ud.user_password = #{user_password})
+		where
+			um.user_email = #{user_email}
+	</select>
+	
+	<select id="idCheck" resultType="Integer">
+		select
+			count(user_email) as result
+		from
+			user_mst
+		where
+			user_email = #{user_email}
+	</select>
+	
+	<insert id="signUp" parameterType="com.spring.study.model.dto.UserDto">
+		insert into
+			user_mst
+		values(
+			user_email = #{user_email},
+			user_password = #{user_password},
+			user_name = #{user_name},
+			user_phone = #{user_phone},
+			now(),
+			now()
+		)
+	</insert>
+	
+	
+	
+	
+	
+</mapper>

@@ -1,28 +1,9 @@
-<%@page import="com.kakao.web.dao.SignInDaoImpl"%>
-<%@page import="com.kakao.web.dao.SignInDao"%>
+<%@page import="com.kakao.web.sign.model.dao.SignInDaoImpl"%>
+<%@page import="com.kakao.web.sign.model.dao.SignInDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<%
-	String submit_flag = request.getParameter("submit_flag") == null ? "0" : request.getParameter("submit_flag");
-	String login_id = request.getParameter("login_id");
-	String login_password = request.getParameter("login_password");
-	
-	int flag = 3;
-	
-	if(submit_flag.equals("1")){
-		SignInDao signInDao = new SignInDaoImpl();
-		
-		flag = signInDao.signIn(login_id, login_password);
-		if(flag == 2){
-			%>
-			<jsp:forward page="index.jsp"></jsp:forward>
-			<%			
-		}
-	}	
-%>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,13 +28,12 @@
                 </div>
                 <div class="warp_form">
                     <h1 class="brand_logo">kakao</h1>
-                    <form action="sign_in.jsp" method="post">
-                    	<input type="hidden" id="submit_flag" name="submit_flag" value="<%=submit_flag %>">
-                    	<input type="hidden" id="flag" value="<%=flag %>">
-                    	<input type="hidden" id="return_id" value="<%=login_id %>">
-                    	<input type="hidden" id="return_password" value="<%=login_password %>">
+                    <form action="signIn" method="post">
+                    	<input type="hidden" id="flag" value="${empty flag ? 3 : flag}">
+                    	<input type="hidden" id="return_id" value="${login_id }">
+                    	<input type="hidden" id="return_password" value="${login_password }">
                         <div class="item_tf">
-                            <input type="email" class="item_ip" name="login_id" placeholder="카카오메일 아이디, 이메일, 전화번호">
+                            <input type="text" class="item_ip" name="login_id" placeholder="카카오메일 아이디, 이메일, 전화번호">
                             <div class="util_tf">                          
                                 <span class="info_mail">@kakao.com</span>                      
                             </div>
@@ -63,18 +43,18 @@
                             카카오메일이 있다면 메일 아이디만 입력해 보세요.
                         </p>
                         <div class="item_msg">
-                        	<span class="msg1">필수 항목입니다.</span>
+                        	<span class="msg1">아이디를 입력해주세요.</span>
                         	<span class="msg2">존재하지 않는 아이디 입니다.</span>
                         </div>
                         <div class="item_tf">
                             <input type="password" class="item_ip" name="login_password" placeholder="비밀번호">
                         </div>
                         <div class="item_msg">
-                        	<span class="msg3">필수 항목입니다.</span>
+                        	<span class="msg3">비밀번호를 입력해주세요.</span>
                         	<span class="msg4">비밀번호가 일치하지 않습니다.</span>
                         </div>
                         <div class="item_chk">
-                            <input type="checkbox" class="item_cb"name="" id="chk">
+                            <input type="checkbox" class="item_cb" name="id_chk_status" id="chk">
                             <label class="chk_on" for="chk">
                                 <i class="far fa-check-circle"></i>
                             </label>
@@ -92,7 +72,7 @@
                         </div>
                     </form>
                     <div class="info_user">
-                        <a href="sign_up_email.jsp">회원가입</a>
+                        <a href="signUp">회원가입</a>
                         <div>
                             <a href="">카카오계정</a>
                             <label> | </label>

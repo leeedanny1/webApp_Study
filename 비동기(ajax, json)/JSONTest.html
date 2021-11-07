@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+
+    <script>
+        var jData = '{"user_name":"이대희", "user_phone":"01012345678"}';
+
+        var objTest = {
+            name:'이대희님',
+            phone:'01098765432'
+        }
+
+        // JSON.parse -> JSON을 객체로 바꿔준다.
+        var obj = JSON.parse(jData);
+        alert(obj.user_name);
+
+        // JSON.stringify -> 문자 또는 데이터, 객체들을 JSON형태로 바꿔준다.
+        var json = JSON.stringify(objTest);
+        alert(json);
+
+
+        
+    </script>
+    
+</body>
+</html>

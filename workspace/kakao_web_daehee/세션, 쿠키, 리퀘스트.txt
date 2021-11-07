@@ -1,0 +1,8 @@
+session: 브라우저가 닫히기 전(프로세스가 죽기 전)까지 생존
+cookie: 브라우저에서 쿠키를 삭제하거나 만료일자가 도래할 때 까지 생존
+request: 요청시에만 생존(클라이언트가 -> 서버에게 요청)
+application: 서버(tomcat)가 종료되기 전까지 생존
+
+cookie를 제외하고는 모두 setAttribute(), getAttribute()를 사용
+
+cookie는 객체생성(key, value 설정)후에 response에 addCookie하여야 한다.

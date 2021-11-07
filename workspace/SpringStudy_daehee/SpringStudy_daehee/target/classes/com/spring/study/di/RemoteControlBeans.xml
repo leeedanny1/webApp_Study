@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	
+	<bean id="c1" class="com.spring.study.di.AirConditionerRemoteControl">
+		<!-- 
+		<property name="company" value="LG"></property>
+		 -->
+	</bean>
+	<bean id="c2" class="com.spring.study.di.AirConditionerRemoteControl">
+		<property name="company" value="SAMSUNG"></property>
+	</bean>
+	<bean id="c3" class="com.spring.study.di.TvRemoteControl">
+		<property name="company" value="LG"></property>
+	</bean>
+	<bean id="centralControl" class="com.spring.study.di.CentralControl">
+		<!-- 
+		<constructor-arg name="control1" ref="control1"></constructor-arg>
+		<constructor-arg name="control2" ref="control3"></constructor-arg>
+		 -->
+	</bean>
+	
+</beans>
