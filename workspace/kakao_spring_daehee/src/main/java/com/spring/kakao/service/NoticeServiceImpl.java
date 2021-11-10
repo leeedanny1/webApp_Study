@@ -80,6 +80,8 @@ public class NoticeServiceImpl implements NoticeService {
 		MultipartFile[] multipartFiles = noticeInsertDto.getNotice_file();
 		String filePath = context.getRealPath("/static/fileupload"); 
 		
+		NoticeDto noticeDto = new NoticeDto();
+		
 		StringBuilder originName = new StringBuilder();
 		StringBuilder tempName = new StringBuilder();
 		
@@ -88,6 +90,9 @@ public class NoticeServiceImpl implements NoticeService {
 //			파일의 이름을 변경함.
 //			중복되는 파일명이 올라오면 하나는 사라지기 때문.
 			String originFile = multipartFile.getOriginalFilename();
+			if(originFile.equals("")) {
+				return noticeDto;
+			}
 			String originFileExtention = originFile.substring(originFile.lastIndexOf("."));
 			String tempFile = UUID.randomUUID().toString().replaceAll("-", "") + originFileExtention;
 			
@@ -113,7 +118,6 @@ public class NoticeServiceImpl implements NoticeService {
 		originName.delete(originName.length()-1, originName.length());
 		tempName.delete(tempName.length()-1, tempName.length());
 		
-		NoticeDto noticeDto = new NoticeDto();
 		noticeDto.setOriginFileNames(originName.toString());
 		noticeDto.setTempFileNames(tempName.toString());
 		
@@ -210,7 +214,7 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		if(result == 1) {
 			result += noticeDao.noticeMstDelete(i_notice_code);
-			if(result == 2) {
+			if(result == 2 && fileList != null) {
 				for(FileBean fileBean:fileList) {
 					File file = new File(filePath, fileBean.getTempFileName());
 					if(file.exists()) {
