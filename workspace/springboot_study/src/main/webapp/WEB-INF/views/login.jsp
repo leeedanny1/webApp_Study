@@ -35,7 +35,8 @@
 				url: "login-submit/" + loginid + "/" + loginpassword,
 				dataType: "text",
 				success: function(data){
-					alert(data);
+					let loginData = JSON.parse(data);
+					alert(loginData.loginFlag);
 				},
 				error: function(){
 					alert("요청 실패");
