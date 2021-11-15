@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html lang="ko">
-    
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>카카오 로그인</title>
-        
+
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/sign_in.css">
 
         <script src="http://code.jquery.com./jquery-latest.min.js"></script>
-        
+
         <!-- 구글 로그인 OAuth 라이브러리 -->
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="266556629905-47taoge051t5uigtedeonsjnrpc99mkt.apps.googleusercontent.com">
-        
+        <meta name="google-signin-client_id" content="225885690621-kh90eb3igifh0b1mn36n7sm08e4q561g.apps.googleusercontent.com">
+
     </head>
 
     <body>
@@ -71,13 +70,13 @@
                             </div>
                             <button class="item_btn btn_qr"><i class="fas fa-qrcode"></i>&nbsp; QR코드 로그인</button>
                         </div>
-                        
-                        
+
+
                         <!-- 구글 로그인 -->
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         <a href="#" onclick="signOut();">Sign out</a>
 
-                        
+
                         <div class="info_user">
                             <a href="signUp">회원가입</a>
                             <div>
@@ -110,74 +109,109 @@
         </div>
         <script src="js/sign_in.js"></script>
         <script src="https://kit.fontawesome.com/c3df4d7d1c.js" crossorigin="anonymous"></script>
-        
+
         <!-- 구글 로그인 세팅 -->
-        <script type="text/javascript">
-        	function init(){
-        		gapi.load('auth2', function(){
-        			let gauth = gapi.auth2.init({
-        				  client_id: '266556629905-47taoge051t5uigtedeonsjnrpc99mkt.apps.googleusercontent.com'
-        			});
-        			gauth.then(
-        				function(){
-        					if(gauth.isSignedIn.get()){
-        						alert('로그인 중');	
-        					}else{
-        						alert('로그인 필요');
-        					}
-        				},
-        				function(){
-        					alert('로그인 실패');
-        				}
-        			)
-        		});
-        	}
-        	function onSignIn(googleUser) {
-        		let access_token = googleUser.getAuthResponse().access_token;
-        		$.ajax({
-        			type: "get",
-        			url: "https://people.googleapis.com/v1/people/me",
-        			data: {
-        				personFields: "birthdays", 
-        				key: "AIzaSyBOkEKSv1hLJmygQRbp4M4bZLqUJ9X3ruM",
-        				'access_token': access_token
-        			}
-        		})
-        		.done(function(e){
-        			let profile = googleUser.getBasicProfile();
-        			console.log(profile);
-        		})
-        		.fail(function(e){
-        			console.log(e);
-        		})
-        	}
-        	
-        	function onSignInFailuer(t){
-        		console.log(t);
-        	}
-        	
-        	function signOut() {
-    		    var auth2 = gapi.auth2.getAuthInstance();
-    		    auth2.signOut().then(function () {
-    		      console.log('User signed out.');
-    		    });
-    		  }
-        </script>
-        
-        
+            <script type="text/javascript">
+    	function init() {
+    		gapi.load('auth2', function() {
+    			let gauth = gapi.auth2.init({
+    				client_id: '225885690621-kh90eb3igifh0b1mn36n7sm08e4q561g.apps.googleusercontent.com'
+    			});
+    			/*
+    			gauth.then(
+    				function(){
+    					if(gauth.isSignedIn.get()){
+    						alert('로그인 중');
+    					}else{
+    						alert('로그인 필요');
+    					}
+    				},
+    				function(){
+    					alert('로그인 실패');
+    				}
+    			)
+    			*/
+    		});
+    	}
+    	
+    	function signIn(profileObj){
+    		$.ajax({
+    			type: "post",
+    			url: "/oauth2/signin",
+    			data: JSON.stringify(profileObj),
+    			dataType: "text",
+    			contentType: "application/json;charset=UTF-8",
+    			success: function(data){
+    				if(data == '1'){
+    					alert("로그인 성공");
+    					location.href = "/index";
+    				}
+    			},
+    			error:function(){
+    				alert('회원가입 데이터 전송 실패');
+    			}
+    			
+    		})
+    	}
+    	
+    	function signUp(profileObj){
+    		$.ajax({
+    			type: "post",
+    			url: "/oauth2/signup",
+    			data: JSON.stringify(profileObj),
+    			dataType: "text",
+    			contentType: "application/json;charset=UTF-8",
+    			success: function(data){
+    				if(data == '1'){
+    					signIn(profileObj);
+    				}
+    			},
+    			error:function(){
+    				alert('회원가입 데이터 전송 실패');
+    			}
+    			
+    		})
+    	}
+    	
+    	function signUpCheck(profileObj){
+    		$.ajax({
+    			type: 'post',
+    			url: '/oauth2/signupcheck',
+    			data: JSON.stringify(profileObj),
+    			dataType: "text",
+    			contentType: "application/json; charset=UTF-8",
+    			success: function(data){
+    				if(data == '0'){
+    					// 회원가입 필요
+    					signUp(profileObj);
+    				}else{
+    					// 로그인
+    					signIn(profileObj);
+    				}
+    			},
+    			error: function(){
+    				alert('전송오류!');
+    			}
+    		})
+    	}
+    	
+    	function onSignIn(googleUser) {
+    		  var profile = googleUser.getBasicProfile();
+    		  let profileObj = {
+    	    			signUpEmail: profile.getEmail(),
+    	    			emailFlag: 1,
+    	    			signUpPassword: '',
+    	    			signUpName: profile.getName(),
+    	    			signUpPhone: '',
+    	    			phoneFlag: 1
+    	    	};
+    		  signUpCheck(profileObj);
+    	}
+    </script>
+
+
         <!-- !!!!! 제일 마지막에 와야 함 !!!!! -->
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     </body>
 
     </html>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

@@ -1,5 +1,7 @@
 package com.springboot.kakao.service;
 
+import java.util.UUID;
+
 import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,14 @@ public class UserServiceImpl implements UserService{
 		Cookie cookie_email = new Cookie("user_email", user_email);
 		cookie_email.setMaxAge(60*60*24);
 		return cookie_email;
-		
+	}
+	
+	
+	@Override
+	public int oAuthSignUp(SignUpVo signUpVo) {
+		signUpVo.setSignUpEmail(signUpVo.getSignUpEmail().substring(0, signUpVo.getSignUpEmail().lastIndexOf("@")));
+		signUpVo.setSignUpPassword(UUID.randomUUID().toString());
+		signUpVo.setSignUpPhone("010-0000-0000");
+		return userDao.signUp(signUpVo);
 	}
 }
