@@ -12,6 +12,11 @@
         <link rel="stylesheet" href="css/sign_in.css">
 
         <script src="http://code.jquery.com./jquery-latest.min.js"></script>
+        
+        <!-- 구글 로그인 OAuth 라이브러리 -->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="266556629905-47taoge051t5uigtedeonsjnrpc99mkt.apps.googleusercontent.com">
+        
     </head>
 
     <body>
@@ -66,6 +71,13 @@
                             </div>
                             <button class="item_btn btn_qr"><i class="fas fa-qrcode"></i>&nbsp; QR코드 로그인</button>
                         </div>
+                        
+                        
+                        <!-- 구글 로그인 -->
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <a href="#" onclick="signOut();">Sign out</a>
+
+                        
                         <div class="info_user">
                             <a href="signUp">회원가입</a>
                             <div>
@@ -98,6 +110,74 @@
         </div>
         <script src="js/sign_in.js"></script>
         <script src="https://kit.fontawesome.com/c3df4d7d1c.js" crossorigin="anonymous"></script>
+        
+        <!-- 구글 로그인 세팅 -->
+        <script type="text/javascript">
+        	function init(){
+        		gapi.load('auth2', function(){
+        			let gauth = gapi.auth2.init({
+        				  client_id: '266556629905-47taoge051t5uigtedeonsjnrpc99mkt.apps.googleusercontent.com'
+        			});
+        			gauth.then(
+        				function(){
+        					if(gauth.isSignedIn.get()){
+        						alert('로그인 중');	
+        					}else{
+        						alert('로그인 필요');
+        					}
+        				},
+        				function(){
+        					alert('로그인 실패');
+        				}
+        			)
+        		});
+        	}
+        	function onSignIn(googleUser) {
+        		let access_token = googleUser.getAuthResponse().access_token;
+        		$.ajax({
+        			type: "get",
+        			url: "https://people.googleapis.com/v1/people/me",
+        			data: {
+        				personFields: "birthdays", 
+        				key: "AIzaSyBOkEKSv1hLJmygQRbp4M4bZLqUJ9X3ruM",
+        				'access_token': access_token
+        			}
+        		})
+        		.done(function(e){
+        			let profile = googleUser.getBasicProfile();
+        			console.log(profile);
+        		})
+        		.fail(function(e){
+        			console.log(e);
+        		})
+        	}
+        	
+        	function onSignInFailuer(t){
+        		console.log(t);
+        	}
+        	
+        	function signOut() {
+    		    var auth2 = gapi.auth2.getAuthInstance();
+    		    auth2.signOut().then(function () {
+    		      console.log('User signed out.');
+    		    });
+    		  }
+        </script>
+        
+        
+        <!-- !!!!! 제일 마지막에 와야 함 !!!!! -->
+        <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     </body>
 
     </html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

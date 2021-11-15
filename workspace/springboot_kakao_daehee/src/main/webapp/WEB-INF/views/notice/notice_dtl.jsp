@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mainNav.css">
     <link rel="stylesheet" href="/css/notice_dtl.css">
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -71,13 +73,13 @@
                 	<ul class="nd_footer_next">
                         <li class="next_title">다음 글</li>
                         <c:if test="${notice.nextNotice_code ne 0}">
-                        	<a href="notice/${notice.nextNotice_code }"><li>${notice.nextNotice_title }</li></a>
+                        	<a href="/notice/${notice.nextNotice_code }"><li>${notice.nextNotice_title }</li></a>
                         </c:if>
                     </ul>
                     <ul class="nd_footer_pre">
                         <li class="pre_title">이전 글</li>
                         <c:if test="${notice.preNotice_code ne 0}">
-                        	<a href="notice/${notice.preNotice_code }"><li>${notice.preNotice_title }</li></a>
+                        	<a href="/notice/${notice.preNotice_code }"><li>${notice.preNotice_title }</li></a>
                     	</c:if>
                     </ul>
                 </div>

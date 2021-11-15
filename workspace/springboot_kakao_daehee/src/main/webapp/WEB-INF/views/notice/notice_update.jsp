@@ -42,22 +42,24 @@
                         </li>
                     </ul>
                     <ul>
-                    	<li>
-                    		<input type="file" multiple="multiple" name="notice_file">
-                    	</li>
+                        <li class="nd-file-ip">
+                            <input type="file" multiple="multiple" name="notice_file">
+                        </li>
                     </ul>
                     <ul>
-	                    <li>
-	                        <c:forEach var="fileBean" items="${fileList}" varStatus="st">
-	                            <a href="file-download/${fileBean.originFileName}?tempFileName=${fileBean.tempFileName}">
-	                            	${fileBean.originFileName}
-	                            </a>
-	                            <c:if test="${not st.last}">
-	                            	/    
-	                            </c:if>
+                        <li class="nd-file-li">
+	                        <c:forEach var="fileBean" items="${fileList}">
+	                            <div class="item-file">
+	                            	<input type="hidden" name="originFileNames" value="${fileBean.originFileName}">
+	                            	<input type="hidden" name="tempFileNames" value="${fileBean.tempFileName}">
+	                                <label class="file-name">${fileBean.originFileName}</label>
+	                                <div class="file-dbtn">
+	                                    <i class="far fa-times-circle"></i>
+	                                </div>
+	                            </div>
 	                        </c:forEach>
-	                    </li>
-	                </ul>
+                        </li>
+                    </ul>
 
                     <button type="button" class="notice_submit">수정완료</button>
                     <button type="reset">다시쓰기</button>
@@ -69,7 +71,7 @@
         </footer>
     </div>
     <script src="https://kit.fontawesome.com/c3df4d7d1c.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/notice_update.js"></script>
+    <script type="text/javascript" src="/js/notice_update.js"></script>
 </body>
 </html>
 

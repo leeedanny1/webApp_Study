@@ -12,7 +12,7 @@ notice_delete_button.onclick = () => {
 	
 	$.ajax({
 		type: "delete",
-		url: "notice/" + notice_code.value,
+		url: "/notice/" + notice_code.value,
 		success: function(data){
 			alert("게시글이 성공적으로 삭제되었습니다.")
 		},

@@ -1,30 +1,38 @@
 const notice_submit = document.querySelector(".notice_submit");
-const insert_form = document.querySelector('#insert_form');
+const updateForm = document.querySelector("#update-form");
+const file_dbtn = document.querySelectorAll('.file-dbtn');
+const file_name = document.querySelectorAll('.file-name');
 
-function noticeInsert(){
-	let formData = new FormData(insert_form);
+for(let i = 0; i < file_dbtn.length; i++){
+    file_dbtn[i].onclick = () => {
+        if(file_name[i].style.textDecoration == 'none' || file_name[i].style.textDecoration == ''){
+            file_name[i].style.textDecoration = 'line-through';
+        } else{
+            file_name[i].style.textDecoration = 'none';
+        }
+    }
+}
 
+
+function noticeUpdate(){
+	let formData = new FormData(updateForm);
+	
 	$.ajax({
-		type: "post",
-		url: "/notice/insert",
+		type: "put",
+		url: "notice/" + formData.get("notice_code"),
 		enctype: "multipart/form-data",
 		data: formData,
 		processData: false,
 		contentType: false,
 		success: function(data){
-			if(data == 0){
-				alert('공지사항 등록에 실패하였습니다.');
-				location.href = '/notice/list/1';
-			}else{
-				alert('공지사항 등록이 완료되었습니다.');
-				location.href = '/notice/' + data;
-			}
+			
 		},
 		error: function(){
-			alert("전송 실패");
+			alert("수정 실패!");
 		}
+		
 	})
-}
+}  
 
 
 notice_submit.onclick = () => {
@@ -38,6 +46,7 @@ notice_submit.onclick = () => {
 	}else if(notice_content.value.length == 0){
 		alert("공지사항 내용을 입력해 주세요.");
 	}else {
-		noticeInsert();
+		const notice_form = document.querySelector("form");
+		notice_form.submit();
 	}
 }

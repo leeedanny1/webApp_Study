@@ -6,6 +6,7 @@ import com.springboot.kakao.model.beans.FileBean;
 import com.springboot.kakao.model.beans.NoticeBean;
 import com.springboot.kakao.model.dto.NoticeDto;
 import com.springboot.kakao.model.dto.NoticeInsertDto;
+import com.springboot.kakao.model.dto.NoticeUpdateDto;
 
 public interface NoticeService {
 	public NoticeBean getNoticeBean();
@@ -28,5 +29,5 @@ public interface NoticeService {
 	
 	public int noticeDelete(String notice_code);
 	
-	
+	public int noticeUpdate(NoticeUpdateDto noticeUpdateDto);
 }
